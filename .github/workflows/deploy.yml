@@ -3,7 +3,7 @@ name: 🚀 Deploy Portfolio to GitHub Pages
 on:
   push:
     branches:
-      - main  # Lance le déploiement à chaque push sur main
+      - main  # Déploie à chaque push sur main
 
 permissions:
   contents: read
@@ -34,18 +34,13 @@ jobs:
         run: npm run build
 
       - name: Upload du dossier dist
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v1
         with:
           path: dist
 
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
-
     steps:
       - name: Déploie sur GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v1
